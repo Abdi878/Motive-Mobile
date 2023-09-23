@@ -3,10 +3,10 @@ import { View, Text } from 'react-native'
 
 import styles from './company.style'
 
-const Company = () => {
+const Company = ({data}) => {
   return (
     <View>
-      <Text>Company</Text>
+      <Text>{data.motive}</Text>
     </View>
   )
 }

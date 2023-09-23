@@ -5,7 +5,7 @@ const setToken = (newToken) => {
   token = `Bearer ${newToken}`;
 };
 const getAll = async () => {
-  const response = await axios.get("http://192.168.1.188:3001/api/blogs");
+  const response = await axios.get("http:/192.168.1.188:3001/api/blogs");
   return response.data;
 };
 const remove = async (id) => {
@@ -26,12 +26,18 @@ const create = async (newObject) => {
   return response.data;
 };
 const update = async (newObject) => {
-  const response = await axios.put(`http://localhost:3001/api/blogs/${newObject.id}`, newObject);
+  const response = await axios.put(
+    `http://localhost:3001/api/blogs/${newObject.id}`,
+    newObject
+  );
   return response.data;
 };
-const createComment = async(thing)=>{
-  const response = await axios.post(`http://localhost:3001/api/blogs/${thing.id}/comments`,{comment:thing.comment,user:thing.user})
-  return response.data
-}
+const createComment = async (thing) => {
+  const response = await axios.post(
+    `http://localhost:3001/api/blogs/${thing.id}/comments`,
+    { comment: thing.comment, user: thing.user }
+  );
+  return response.data;
+};
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, create, setToken, update, remove,createComment };
+export default { getAll, create, setToken, update, remove, createComment };

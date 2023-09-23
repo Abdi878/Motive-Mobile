@@ -19,18 +19,19 @@ const Welcome = () => {
   const router = useRouter();
   const categories = ["Basketball", "Football", "Cricket", "Tennis"];
   const [activeCategory, setActiveCategory] = useState("All");
+  const [search,setSearch]= useState("")
   return (
     <View>
       <View style={styles.container}>
         <Text style={styles.userName}>Hello Abdinasir</Text>
-        <Text style={styles.welcomeMessage}>Find motives near you</Text>
+        <Text style={styles.welcomeMessage}>Find games near you</Text>
       </View>
       <View style={styles.searchContainer}>
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
-            value=""
-            onChange={() => {}}
+            value={search}
+            onChange={(e) => {setSearch(e.target.value)}}
             placeholder="What are you looking for"
           />
         </View>
@@ -58,7 +59,7 @@ const Welcome = () => {
               </View>
             </TouchableOpacity>
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item}
           contentContainerStyle={{ columnGap: SIZES.small }}
           horizontal
         ></FlatList>

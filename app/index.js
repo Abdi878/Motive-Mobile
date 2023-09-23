@@ -1,5 +1,11 @@
-import { useState } from "react";
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import { useCallback, useState } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  SafeAreaView,
+  RefreshControl,
+} from "react-native";
 import { Stack, useRouter } from "expo-router";
 
 import { COLORS, icons, images, SIZES } from "../constants";
@@ -13,6 +19,14 @@ import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 const queryClient = new QueryClient();
 const Home = () => {
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000)
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -30,10 +44,14 @@ const Home = () => {
             headerTitle: "",
           }}
         />
-        <ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
           <View style={{ flex: 1, padding: SIZES.medium }}>
             <Welcome />
-            <Popularjobs />
+            <Popularjobs refreshing={refreshing} />
             <Nearbyjobs />
           </View>
         </ScrollView>
